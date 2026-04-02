@@ -1,8 +1,12 @@
 export default {
   name: "Mazin Ahmed Ibrahim",
-  title: "Full Stack Web Developer | Civil Engineer",
-  tagline: "Building scalable web applications & real-world engineering solutions.",
+  title: "Frontend Developer",
+  tagline: "Frontend Developer passionate about building modern, responsive, and user-focused web experiences with clean UI, smooth interactions, and real-world problem solving.",
 
+  description:
+    "I’m a Frontend Developer focused on creating responsive, modern, and user-centered web applications. I combine clean design, smooth user experience, and practical problem solving to build digital products that feel professional and intuitive.",
+
+  
   contact: {
     email: "mazin.ahmed.i.m@gmail.com",
     phone: "+256789807191",
@@ -20,7 +24,7 @@ export default {
   },
 
   about:
-    "Full Stack Web Developer with a Civil Engineering background and 7+ years of experience in project management, supervision, and technical coordination. Skilled in building modern web applications using JavaScript, Vue.js, Node.js, and REST APIs. Passionate about solving real-world problems through technology and engineering thinking.",
+    "I’m a Frontend Developer with a background in Civil Engineering, combining technical thinking, structured problem solving, and modern web design to build impactful digital experiences. I enjoy transforming ideas into responsive, elegant, and user-friendly interfaces.",
 
   skills: [
     {
@@ -35,13 +39,14 @@ export default {
       title: "🛠 Tools & Platforms",
       items: "Git, GitHub, VS Code, Postman, Netlify, Render"
     },
+   
+    {
+      title: "🎨 Graphic Design",
+      items: "Canva, figma, Adobe Photoshop"
+    },
     {
       title: "🏗️ Civil Engineering Software",
       items: "AutoCAD, Revit Structure, ETABS, SAFE, Autodesk Robot Structural Analysis"
-    },
-    {
-      title: "🎨 Graphic Design",
-      items: "Canva, Adobe Photoshop"
     }
   ],
 
@@ -63,15 +68,36 @@ export default {
       image: "/projects/zakat.png",
       live: "https://zakatul-fitir-kampala.netlify.app/",
       github: "https://github.com/mazinahmed2010/zakatul-fitr-calculator-kampal-2026"
+    },
+    {
+      name: "Authentication UI",
+      desc:
+        "A responsive authentication interface with form validation and a clean user flow design,Improved user experience through simple and intuitive interaction.",
+      category: "Frontend",
+      image: "/projects/Authentication UI.png",
+      live: "https://mazinahmed2010.github.io/KGL-logo-Authentication/",
+      github: "https://github.com/mazinahmed2010/KGL-logo-Authentication"
+    },
+
+    {
+      name: "Mazin Ahmed Portfolio",
+      category: "Frontend",
+      image: "/projects/portfolio.png",
+      desc:
+        "A premium personal portfolio built with Vue.js to showcase my frontend skills, projects, education, and professional identity with smooth animations and a modern UI.",
+      tech: ["Vue.js", "Vite", "CSS3", "AOS", "Responsive Design"],
+      live: "https://mazin-ahmed-portfolio.netlify.app/",
+      github: "https://github.com/mazinahmed2010/mazin-ahmed-portfolio"
     }
+
   ],
 
   experience: [
     {
-      role: "Full Stack Web Developer | Freelancer",
+      role: "Frontend Developer – Freelance",
       date: "2025 - Present",
       desc:
-        "Designing and building modern web applications, creating responsive UIs, integrating APIs, and deploying projects to cloud platforms."
+        "Developing responsive web interfaces, portfolio websites, dashboards, and digital products using Vue.js and modern frontend practices. Focused on clean UI, usability, and polished user experiences."
     },
     {
       role: "Civil Engineer – Audit Bureau Consultancy",
