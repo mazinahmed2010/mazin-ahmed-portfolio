@@ -7,7 +7,7 @@
       aria-label="Back to top"
       title="Back to top"
     >
-      ↑
+      &uarr;
     </button>
   </transition>
 </template>
@@ -23,7 +23,7 @@ defineProps({
 function scrollTop() {
   window.scrollTo({
     top: 0,
-    behavior: 'smooth'
+    behavior: "smooth"
   })
 }
 </script>

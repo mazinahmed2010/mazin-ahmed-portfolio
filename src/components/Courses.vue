@@ -1,6 +1,6 @@
 <template>
   <section id="courses" data-aos="fade-up">
-    <h2>Courses & Certifications</h2>
+    <h2>{{ $t("sections.courses") }}</h2>
 
     <div class="card">
       <ul class="course-list">

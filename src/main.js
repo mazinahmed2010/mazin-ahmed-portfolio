@@ -1,16 +1,20 @@
-import { createApp } from 'vue'
-import App from './App.vue'
-import './assets/styles.css'
+import { createApp } from "vue"
+import App from "./App.vue"
 
-import AOS from 'aos'
-import 'aos/dist/aos.css'
+import AOS from "aos"
+import "aos/dist/aos.css"
 
-import '@fortawesome/fontawesome-free/css/all.min.css'
+import "remixicon/fonts/remixicon.css"
 
-const app = createApp(App)
-app.mount('#app')
+import i18n from "./i18n"
+
+import "./assets/styles.css"
 
 AOS.init({
   duration: 1000,
   once: true
 })
+
+createApp(App)
+  .use(i18n)
+  .mount("#app")

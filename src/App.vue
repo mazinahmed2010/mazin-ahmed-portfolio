@@ -1,114 +1,102 @@
 <template>
-  <Loader :show="isLoading" />
+  <div>
 
+    <Navbar
+    />
 
-<Navbar
-  :activeSection="activeSection"
-  :isDark="isDark"
-  @toggle-theme="toggleTheme"
-/>
+    <Hero :data="portfolioData" />
+    <About :data="portfolioData" />
+    <Skills :data="portfolioData" />
+    <Projects :data="portfolioData" />
+    <Experience :data="portfolioData" />
+    <Education :data="portfolioData" />
+    <Contact :data="portfolioData" />
+    <Footer :data="portfolioData" />
+    <BackToTop />
 
-  <div class="container">
-    <Hero :data="data" />
-    <About :data="data" />
-    <Skills :data="data" />
-    <Projects :data="data" />
-    <Experience :data="data" />
-    <Education :data="data" />
-    <Courses :data="data" />
-    <Contact :data="data" />
-    <Footer :data="data" />
   </div>
-
-  <BackToTop :visible="showBackToTop" />
 </template>
 
 <script setup>
-import { ref, onMounted, onBeforeUnmount } from 'vue'
-import data from './data/data'
+import { computed } from "vue"
+import { useI18n } from "vue-i18n"
 
-import Loader from './components/Loader.vue'
-import BackToTop from './components/BackToTop.vue'
-import Navbar from './components/Navbar.vue'
-import Hero from './components/Hero.vue'
-import About from './components/About.vue'
-import Skills from './components/Skills.vue'
-import Projects from './components/Projects.vue'
-import Experience from './components/Experience.vue'
-import Education from './components/Education.vue'
-import Courses from './components/Courses.vue'
-import Contact from './components/Contact.vue'
-import Footer from './components/Footer.vue'
+import Navbar from "./components/Navbar.vue"
+import Hero from "./components/Hero.vue"
+import About from "./components/About.vue"
+import Skills from "./components/Skills.vue"
+import Projects from "./components/Projects.vue"
+import Experience from "./components/Experience.vue"
+import Education from "./components/Education.vue"
+import Contact from "./components/Contact.vue"
+import Footer from "./components/Footer.vue"
+import BackToTop from "./components/BackToTop.vue"
+import {
+  about,
+  education,
+  experience,
+  languages,
+  personal,
+  projects,
+  skills,
+  socialLinks
+} from "./data/data.js"
 
-const isLoading = ref(true)
-const isDark = ref(true)
-const scrollProgress = ref(0)
-const activeSection = ref('hero')
-const showBackToTop = ref(false)
+const { locale } = useI18n()
 
-function updateTheme() {
-  document.body.classList.toggle("light", !isDark.value)
-}
+const social = computed(() => {
+  return socialLinks.reduce((links, item) => {
+    links[item.name.toLowerCase()] = item.url
+    return links
+  }, {})
+})
 
-function toggleTheme() {
-  isDark.value = !isDark.value
-  localStorage.setItem("theme", isDark.value ? "dark" : "light")
-  updateTheme()
-}
+const portfolioData = computed(() => {
+  const currentLocale = locale.value
 
-function updateScrollProgress() {
-  const scrollTop = window.scrollY
-  const docHeight = document.documentElement.scrollHeight - window.innerHeight
-  scrollProgress.value = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0
-}
-
-function updateActiveSection() {
-  const sections = document.querySelectorAll('section[id]')
-  let current = 'hero'
-
-  sections.forEach(section => {
-    const top = section.offsetTop - 120
-    const height = section.offsetHeight
-
-    if (window.scrollY >= top && window.scrollY < top + height) {
-      current = section.id
-    }
-  })
-
-  activeSection.value = current
-}
-
-function updateBackToTop() {
-  showBackToTop.value = window.scrollY > 500
-}
-
-onMounted(() => {
-  const savedTheme = localStorage.getItem("theme")
-
-  if (savedTheme) {
-    isDark.value = savedTheme === "dark"
-  } else {
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-    isDark.value = prefersDark
+  return {
+    name: personal.name,
+    title: personal.title[currentLocale],
+    tagline: personal.tagline[currentLocale],
+    image: personal.image,
+    cv: personal.cv,
+    about: about[currentLocale].trim(),
+    skills: skills.map((skill) => ({
+      icon: skill.icon,
+      title: skill.category[currentLocale],
+      items: skill.items
+    })),
+    projects: projects.map((project) => ({
+      name: project.title,
+      image: project.image,
+      category: project.tech[0],
+      desc: project.description[currentLocale],
+      live: project.live,
+      github: project.github
+    })),
+    experience: experience.map((item) => ({
+      role: item.role[currentLocale],
+      date: item.period,
+      desc: item.details[currentLocale]
+    })),
+    education: education.map((item) => ({
+      logo: item.logo,
+      title: item.degree[currentLocale],
+      place:
+        typeof item.school === "string"
+          ? item.school
+          : item.school[currentLocale],
+      date: item.period
+    })),
+    courses: languages.map((item) => item[currentLocale]),
+    contact: {
+      email: personal.email,
+      phone: personal.phone,
+      github: social.value.github,
+      linkedin: social.value.linkedin
+    },
+    socialLinks
   }
-
-  updateTheme()
-  updateScrollProgress()
-  updateActiveSection()
-  updateBackToTop()
-
-  window.addEventListener('scroll', updateScrollProgress)
-  window.addEventListener('scroll', updateActiveSection)
-  window.addEventListener('scroll', updateBackToTop)
-
-  setTimeout(() => {
-    isLoading.value = false
-  }, 1200)
 })
 
-onBeforeUnmount(() => {
-  window.removeEventListener('scroll', updateScrollProgress)
-  window.removeEventListener('scroll', updateActiveSection)
-  window.removeEventListener('scroll', updateBackToTop)
-})
 </script>

@@ -1,6 +1,6 @@
 <template>
   <section id="about" data-aos="fade-up">
-    <h2>About Me</h2>
+    <h2>{{ $t("sections.about") }}</h2>
     <div class="card">
       <p>{{ data.about }}</p>
     </div>

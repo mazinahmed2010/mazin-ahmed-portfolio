@@ -1,6 +1,6 @@
 <template>
   <section id="experience" data-aos="fade-up">
-    <h2>Experience</h2>
+    <h2>{{ $t("sections.experience") }}</h2>
 
     <div class="timeline">
       <div class="timeline-item" v-for="(exp, index) in data.experience" :key="index">
