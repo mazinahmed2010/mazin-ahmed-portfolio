@@ -83,7 +83,7 @@ function getInitials(place) {
   padding: 0.85rem;
   border-radius: 20px;
   background: rgba(110, 168, 254, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid var(--strong-border);
 }
 
 .edu-logo {

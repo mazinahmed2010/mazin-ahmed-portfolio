@@ -193,8 +193,8 @@ const lastName = computed(() => nameParts.value.slice(2).join(" "))
 
   z-index: 2;
 
-  border: 8px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.35);
+  border: 8px solid var(--image-border);
+  box-shadow: var(--shadow);
 }
 
 @keyframes pulse {

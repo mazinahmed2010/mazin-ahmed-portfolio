@@ -39,7 +39,7 @@ defineProps(["data"])
   padding: 3rem 1.5rem;
   text-align: center;
   border-top: 1px solid var(--border);
-  background: rgba(255, 255, 255, 0.02);
+  background: var(--surface);
 }
 
 .footer-top h3 {
@@ -77,7 +77,7 @@ defineProps(["data"])
   border: 1px solid var(--border);
   border-radius: 50%;
   color: var(--text);
-  background: rgba(255, 255, 255, 0.04);
+  background: var(--icon-bg);
   transition: var(--transition);
 }
 

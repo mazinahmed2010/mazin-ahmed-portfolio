@@ -27,6 +27,17 @@
           <span>{{ locale === "en" ? "AR" : "EN" }}</span>
         </button>
 
+        <!-- THEME -->
+        <button
+          class="theme-btn"
+          type="button"
+          :aria-label="themeLabel"
+          :title="themeLabel"
+          @click="toggleTheme"
+        >
+          <i :class="themeIcon"></i>
+        </button>
+
         <!-- CV -->
         <a
           href="/Mazin_CV.pdf"
@@ -67,6 +78,17 @@
             <span>{{ locale === "en" ? "AR" : "EN" }}</span>
           </button>
 
+          <button
+            class="theme-btn mobile-theme"
+            type="button"
+            :aria-label="themeLabel"
+            :title="themeLabel"
+            @click="toggleTheme"
+          >
+            <i :class="themeIcon"></i>
+            <span>{{ themeLabel }}</span>
+          </button>
+
           <a
             href="/Mazin_CV.pdf"
             download
@@ -82,7 +104,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onBeforeUnmount } from "vue"
+import { computed, ref, onMounted, onBeforeUnmount } from "vue"
 import { useI18n } from "vue-i18n"
 
 defineProps({
@@ -91,8 +113,21 @@ defineProps({
 
 const isMenuOpen = ref(false)
 const isScrolled = ref(false)
+const theme = ref("dark")
 
 const { locale } = useI18n()
+
+const themeIcon = computed(() =>
+  theme.value === "light"
+    ? "ri-moon-line"
+    : "ri-sun-line"
+)
+
+const themeLabel = computed(() =>
+  theme.value === "light"
+    ? "Switch to dark mode"
+    : "Switch to light mode"
+)
 
 const navItems = [
   {
@@ -147,8 +182,33 @@ function toggleLanguage() {
       : "ltr"
 }
 
+function applyTheme(nextTheme) {
+  theme.value = nextTheme
+  document.documentElement.dataset.theme = nextTheme
+  localStorage.setItem("theme", nextTheme)
+}
+
+function toggleTheme() {
+  applyTheme(theme.value === "light" ? "dark" : "light")
+}
+
+function getInitialTheme() {
+  const savedTheme = localStorage.getItem("theme")
+
+  if (savedTheme === "light" || savedTheme === "dark") {
+    return savedTheme
+  }
+
+  return window.matchMedia("(prefers-color-scheme: light)").matches
+    ? "light"
+    : "dark"
+}
+
 onMounted(() => {
   window.addEventListener("scroll", handleScroll)
+
+  handleScroll()
+  applyTheme(getInitialTheme())
 
   document.documentElement.lang = locale.value
   document.documentElement.dir =
@@ -173,14 +233,14 @@ onBeforeUnmount(() => {
   width: 100%;
   z-index: 999;
   backdrop-filter: blur(18px);
-  background: rgba(11, 15, 25, 0.9);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  background: var(--navbar-bg);
+  border-bottom: 1px solid var(--border);
   transition: 0.35s ease;
 }
 
 .scrolled {
-  background: rgba(11, 15, 25, 0.96);
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  background: var(--navbar-scrolled-bg);
+  box-shadow: var(--shadow);
 }
 
 .navbar-inner {
@@ -210,8 +270,8 @@ onBeforeUnmount(() => {
 
   background: linear-gradient(
     90deg,
-    #ffffff,
-    #cfcfcf
+    var(--logo-start),
+    var(--logo-end)
   );
 
   -webkit-background-clip: text;
@@ -309,7 +369,8 @@ onBeforeUnmount(() => {
 ========================= */
 
 .lang-btn,
-.mobile-lang {
+.mobile-lang,
+.theme-btn {
   border: 1px solid var(--border);
   background: var(--card);
   color: var(--text);
@@ -330,13 +391,20 @@ onBeforeUnmount(() => {
   font-weight: 700;
 }
 
-.lang-btn span {
+.theme-btn i {
+  font-size: 1.15rem;
+  line-height: 1;
+}
+
+.lang-btn span,
+.theme-btn span {
   color: currentColor;
   line-height: 1;
 }
 
 .lang-btn:hover,
-.mobile-lang:hover {
+.mobile-lang:hover,
+.theme-btn:hover {
   border-color: var(--primary);
   transform: translateY(-2px);
 }
@@ -449,10 +517,10 @@ onBeforeUnmount(() => {
 
     padding: 1.5rem;
 
-    background: rgba(11, 15, 25, 0.98);
+    background: var(--mobile-menu-bg);
     backdrop-filter: blur(18px);
 
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    border-top: 1px solid var(--border);
   }
 
   .mobile-menu a {
@@ -473,6 +541,13 @@ onBeforeUnmount(() => {
     width: 100%;
     border-radius: 999px;
     height: 50px;
+  }
+
+  .mobile-theme {
+    width: 100%;
+    height: 50px;
+    border-radius: 999px;
+    gap: 0.5rem;
   }
 
   .navbar-inner {
