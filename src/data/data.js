@@ -2,8 +2,8 @@ export const personal = {
   name: "Mazin Ahmed Ibrahim",
 
   title: {
-    en: "Full Stack Web Developer & Civil Engineer",
-    ar: "مطور ويب متكامل ومهندس مدني"
+    en: "Web Developer",
+    ar: "مطور ويب "
   },
 
   tagline: {
@@ -64,15 +64,14 @@ export const socialLinks = [
 
 export const about = {
   en: `
-Civil Engineer and Full Stack Developer with experience in construction project coordination and modern web application development.
+Full Stack Developer with experience in modern web application development.
 
 Skilled in building responsive and user-friendly applications using HTML, CSS, JavaScript, React.js, Vue.js, Node.js, Express.js, MongoDB, and Next.js.
 
 Experienced in creating scalable systems, REST APIs, responsive dashboards, and modern UI/UX experiences with strong attention to performance and usability.
 `,
 
-  ar: `
-مهندس مدني ومطور ويب متكامل لدي خبرة في تنسيق المشاريع الإنشائية وتطوير تطبيقات الويب الحديثة.
+  ar: `مطور ويب متكامل لدي خبرة في تطوير تطبيقات الويب الحديثة
 
 أعمل على بناء تطبيقات متجاوبة وسهلة الاستخدام باستخدام HTML وCSS وJavaScript وReact.js وVue.js وNode.js وExpress.js وMongoDB وNext.js.
 
@@ -247,7 +246,7 @@ export const education = [
       en: "Refactory Academy | Uganda",
       ar: "أكاديمية ريفاكتوري | أوغندا"
     },
-    logo: "public/logos/refactory.png",
+    logo: "/logos/refactory.png",
     degree: {
       en: "Certificate in Software Engineering with JavaScript",
       ar: "شهادة في هندسة البرمجيات باستخدام JavaScript"
@@ -259,7 +258,7 @@ export const education = [
       en: "Al-Zaiem Al-Azhari University | Sudan",
       ar: "جامعة الزعيم الأزهري | السودان"
     },
-    logo: "public/logos/azhari.png",
+    logo: "/logos/azhari.png",
     degree: {
       en: "Bachelor of Civil Engineering",
       ar: "بكالوريوس الهندسة المدنية"
